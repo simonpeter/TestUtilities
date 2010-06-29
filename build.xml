@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<project name="TestUtilities" default="build" basedir=".">
+
+    <property name="src"             value="src" />
+    <property name="src.test"        value="test" />
+    <property name="build"           value="bin" />
+    <property name="reports"         value="reports" />
+    <property name="lib"             value="lib" />
+
+    <path id ="base.path">
+    </path>
+    <path id ="test.path">
+        <path refid="base.path" />
+        <pathelement location="${build}" />
+        <pathelement location="${lib}/junit-4.8.2.jar" />
+    </path>
+
+    <target name="init">
+        <tstamp/>
+        <available property="junit.present" classpathref="test.path" classname="org.junit.Test" />
+    </target>
+    
+    <target name="clean" depends="init">
+        <delete dir="${build}" />
+        <delete dir="${reports}" />
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${build}" />
+        <javac srcdir="${src}"      destdir="${build}" classpathref="base.path" />
+        <javac srcdir="${src.test}" destdir="${build}" classpathref="test.path" />
+    </target>
+
+    <target name="test" depends="compile" if="junit.present">
+        <mkdir dir="${reports}" />
+        <junit>
+            <classpath>
+                <path refid="test.path" />
+            </classpath>
+            <formatter type="plain" usefile="false" />
+            <formatter type="xml" />
+            <batchtest todir="${reports}">
+                <fileset dir="${build}">
+                    <include name="org/simonpeter/**/*Test.class" />
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="${reports}">
+            <fileset dir="${reports}">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="${reports}/html" />
+        </junitreport>
+    </target>
+
+    <target name="build" depends="test" description="Run a full build." />
+
+</project>
