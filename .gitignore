@@ -2,3 +2,5 @@ log/*.log
 tmp/*
 *.class
 *~
+dist/*
+reports/*
