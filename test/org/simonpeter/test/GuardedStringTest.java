@@ -10,9 +10,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 /**
+ * Test the {@link GuardedString} test utility object.
  * 
  * @author  Simon Peter Chappell
- * @version 20100624
+ * @version 20100701
  */
 public final class GuardedStringTest {
 
