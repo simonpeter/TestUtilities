@@ -147,7 +147,7 @@ public final class GuardedInteger {
 			min = b;
 			max = a;
 		}
-		if (guardedInteger >= min && guardedInteger <= min) {
+		if (guardedInteger >= min && guardedInteger <= max) {
 			throw new IllegalArgumentException("Value must be outside of the range "+min+" to "+max+" inclusive");
 		}
 		return this;
