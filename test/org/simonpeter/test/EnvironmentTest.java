@@ -23,7 +23,7 @@ public class EnvironmentTest {
 	@Test public void testCurrentTimeMillisInProductionMode() {
 		Environment.setTestMode(false);
 		long time = Environment.currentTimeMillis();
-		assertTrue(time > 1234567890123L);
+		assertTrue(time >= 1234567890123L);
 	}
 	
 }
